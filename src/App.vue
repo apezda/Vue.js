@@ -1,22 +1,37 @@
 <template>
   <div>
-    <h1> Clicked {{ times }} times. </h1>
-    <button @click="Increase()">More!</button>
-    <button @click="Start()"> Start over! </button>
+    <div>
+      <h1 v-if="list.length > 0" > Participants list </h1>
+      <ol>
+        <li>John Doe</li>
+        <li>Robin Hood</li>
+        <li>Chuck Norris</li>
+        <li v-for="person in list"> {{person}}</li>
+      </ol>
+    </div>
+
+    <h3>New participant</h3>
+    <form @submit.prevent="addNewParticipant()">
+      <label>Firstname</label>
+      <input type="text" v-model="Firstname">
+      <label>Lastname</label>
+      <input type="text" v-model="Lastname">
+      <button> Add new participant</button>
+    </form>
   </div>
 </template>
 
 <script>
     export default {
         data() {
-            return {times: 0}
+            return { list: [] } ;
         },
         methods: {
-            Increase() {
-                this.times += 1;
-            },
-            Start () {
-                this.times = 0;
+            addNewParticipant() {
+                this.list.push (this.Firstname + ' ' + this.Lastname);
+                this.Firstname="";
+                this.Lastname="";
+
             }
         }
     };
