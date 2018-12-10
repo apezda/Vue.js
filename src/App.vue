@@ -3,9 +3,6 @@
     <div>
       <h1 v-if="list.length > 0" > Participants list </h1>
       <ol>
-        <li>John Doe</li>
-        <li>Robin Hood</li>
-        <li>Chuck Norris</li>
         <li v-for="person in list"> {{person}}</li>
       </ol>
     </div>
@@ -28,6 +25,10 @@
         },
         methods: {
             addNewParticipant() {
+                if (!this.Firstname || !this.Lastname) {
+                    return;
+                }
+
                 this.list.push (this.Firstname + ' ' + this.Lastname);
                 this.Firstname="";
                 this.Lastname="";
